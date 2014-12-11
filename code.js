@@ -4,17 +4,12 @@ if (Meteor.isClient) {
   	console.log('Name: ', name);
   };
 
-  computation = Deps.autorun(function(computation) {
+  Deps.autorun(function () {
   	printName();
-  }); 
-
-  doInvalidation = function () {
-  	console.log('before computation invalidate');
-  	computation.invalidate();
-  	console.log('finished calling the invalidate method');
-  };
-
-  computation.onInvalidate(function () {
-  	console.log('invalidate callback – happens AS SOON as .invalidate() is called.');
   });
+
+  setName = function (name) {
+  	Session.set('name', name);
+  	console.log('set name to: ', name);
+  };
 }
