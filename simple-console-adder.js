@@ -5,6 +5,8 @@ if (Meteor.isClient) {
     return a + b;
   }
 
-  var result = add('a','b');
-  console.log('result: ', result);
+  Deps.autorun(function(){
+    var result = add('a','b');
+    console.log('result: ', result);
+  });
 }
