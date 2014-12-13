@@ -5,11 +5,13 @@ if (Meteor.isClient) {
   	_value: null,
 
   	get: function (){
+  		this._dep.depend();
   		return this._value;
   	},
 
   	set: function(value){
   		this._value = value;
+  		this._dep.changed();
   	}
   };
 
@@ -18,6 +20,10 @@ if (Meteor.isClient) {
   	console.log('name: ', name);
   };
 
+  Deps.autorun(function (){
+  	printName();
+  });
+  
   Deps.autorun(function (){
   	printName();
   });
