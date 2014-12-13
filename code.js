@@ -10,6 +10,8 @@ if (Meteor.isClient) {
   	},
 
   	set: function(value){
+  		if (EJSON.equals(this._value, value))
+  			return;
   		this._value = value;
   		this._dep.changed();
   	}
@@ -23,7 +25,7 @@ if (Meteor.isClient) {
   Deps.autorun(function (){
   	printName();
   });
-  
+
   Deps.autorun(function (){
   	printName();
   });
