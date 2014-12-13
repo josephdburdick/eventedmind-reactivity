@@ -1,15 +1,24 @@
 if (Meteor.isClient) {
-  printName = function () {
-  	var name = Session.get('name');
-  	console.log('Name: ', name);
+  Name = {
+  	_dep: new Deps.Dependency,
+
+  	_value: null,
+
+  	get: function (){
+  		return this._value;
+  	},
+
+  	set: function(value){
+  		this._value = value;
+  	}
   };
 
-  Deps.autorun(function () {
+  printName = function(){
+  	var name = Name.get();
+  	console.log('name: ', name);
+  };
+
+  Deps.autorun(function (){
   	printName();
   });
-
-  setName = function (name) {
-  	Session.set('name', name);
-  	console.log('set name to: ', name);
-  };
 }
